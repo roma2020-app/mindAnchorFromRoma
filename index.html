@@ -144,7 +144,7 @@
                         <!-- Mood Gauge -->
                         <div class="stat-card glass-panel text-center">
                             <h3>Mental State</h3>
-                            <div class="mood-indicator-large" id="mood-emoji">😊</div>
+                            <div class="mood-indicator-large" id="mood-emoji" role="img" aria-label="Smiling Face Emoji">😊</div>
                             <h4 id="mood-state-text">Focused & Calmer</h4>
                             <p class="stat-desc" id="mood-advice">Consistent energy levels detected in logs.</p>
                         </div>
@@ -186,11 +186,11 @@
                                 <div class="slider-group">
                                     <label>Current Mood (1 - Low to 5 - Peak)</label>
                                     <div class="mood-selector">
-                                        <input type="radio" name="mood" id="m1" value="1"><label for="m1">😢</label>
-                                        <input type="radio" name="mood" id="m2" value="2"><label for="m2">😔</label>
-                                        <input type="radio" name="mood" id="m3" value="3" checked><label for="m3">😐</label>
-                                        <input type="radio" name="mood" id="m4" value="4"><label for="m4">😊</label>
-                                        <input type="radio" name="mood" id="m5" value="5"><label for="m5">🔥</label>
+                                        <input type="radio" name="mood" id="m1" value="1"><label for="m1" aria-label="Very Overwhelmed"><span role="img" aria-label="Very Overwhelmed">😢</span></label>
+                                        <input type="radio" name="mood" id="m2" value="2"><label for="m2" aria-label="Slightly Anxious / Sad"><span role="img" aria-label="Slightly Anxious or Sad">😔</span></label>
+                                        <input type="radio" name="mood" id="m3" value="3" checked><label for="m3" aria-label="Neutral Mindset"><span role="img" aria-label="Neutral Mindset">😐</span></label>
+                                        <input type="radio" name="mood" id="m4" value="4"><label for="m4" aria-label="Focused & Calm"><span role="img" aria-label="Focused and Calm">😊</span></label>
+                                        <input type="radio" name="mood" id="m5" value="5"><label for="m5" aria-label="Highly Energized"><span role="img" aria-label="Highly Energized">🔥</span></label>
                                     </div>
                                 </div>
 
@@ -326,7 +326,7 @@
                         <!-- Chat Header -->
                         <div class="chat-header-bar">
                             <div class="chat-bot-details">
-                                <div class="bot-avatar">🤖</div>
+                                <div class="bot-avatar" role="img" aria-label="AI Buddy Avatar">🤖</div>
                                 <div>
                                     <h3>MindAnchor Buddy</h3>
                                     <span class="subtext">Empathetic AI Companion • Active Listener</span>
@@ -358,8 +358,8 @@
 
                         <!-- Chat Input Box -->
                         <div class="chat-input-bar">
-                            <input type="text" id="chat-input" placeholder="Vent or talk to your companion..." autocomplete="off">
-                            <button id="chat-send-btn" class="btn btn-primary">Send ➔</button>
+                            <input type="text" id="chat-input" placeholder="Vent or talk to your companion..." autocomplete="off" aria-label="Vent or talk to your companion" role="textbox">
+                            <button id="chat-send-btn" class="btn btn-primary" aria-label="Send message">Send ➔</button>
                         </div>
                     </div>
                 </section>
@@ -433,7 +433,7 @@
                             <h3>Google Gemini AI Engine</h3>
                             <p class="subtitle-text">Enter your Google Gemini API Key to enable authentic, advanced mental health insights and customized cognitive reframing. Otherwise, local premium simulation filters will be utilized.</p>
                             <div class="api-key-input-container mt-2">
-                                <input type="password" id="gemini-api-key" placeholder="Enter AI_GEMINI_API_KEY..." class="form-input">
+                                <input type="password" id="gemini-api-key" placeholder="Enter AI_GEMINI_API_KEY..." class="form-input" aria-label="Google Gemini API Key">
                                 <button id="save-api-key-btn" class="btn btn-primary">Save Key</button>
                                 <button id="clear-api-key-btn" class="btn btn-outline d-none">Remove Key</button>
                             </div>
@@ -525,19 +525,19 @@
         </div>
 
         <!-- ================= MOBILE BOTTOM NAVIGATION BAR ================= -->
-        <div class="mobile-nav-bar">
-            <button class="nav-item mobile-nav-item active" data-view="dashboard" title="Dashboard">📊</button>
-            <button class="nav-item mobile-nav-item" data-view="journal" title="CBT Reframer">✍️</button>
-            <button class="nav-item mobile-nav-item" data-view="chat" title="Chat Companion">💬</button>
-            <button class="nav-item mobile-nav-item" data-view="breathing" title="Sound & Breath">🧘</button>
-            <button class="nav-item mobile-nav-item" data-view="geeta" title="Gita Wisdom">🕉️</button>
-            <button class="nav-item mobile-nav-item" data-view="settings" title="Settings">⚙️</button>
+        <div class="mobile-nav-bar" role="navigation" aria-label="Mobile Navigation">
+            <button class="nav-item mobile-nav-item active" data-view="dashboard" title="Dashboard" aria-label="Dashboard"><span role="img" aria-label="Dashboard">📊</span></button>
+            <button class="nav-item mobile-nav-item" data-view="journal" title="CBT Reframer" aria-label="AI CBT Reframer"><span role="img" aria-label="CBT Reframer">✍️</span></button>
+            <button class="nav-item mobile-nav-item" data-view="chat" title="Chat Companion" aria-label="Chat Companion"><span role="img" aria-label="Chat Companion">💬</span></button>
+            <button class="nav-item mobile-nav-item" data-view="breathing" title="Sound & Breath" aria-label="Sound and Breath"><span role="img" aria-label="Sound and Breath">🧘</span></button>
+            <button class="nav-item mobile-nav-item" data-view="geeta" title="Gita Wisdom" aria-label="Gita Wisdom"><span role="img" aria-label="Gita Wisdom">🕉️</span></button>
+            <button class="nav-item mobile-nav-item" data-view="settings" title="Settings" aria-label="Settings"><span role="img" aria-label="Settings">⚙️</span></button>
         </div>
 
         <!-- ================= CRISIS HELPLINE OVERLAY ================= -->
         <div id="crisis-overlay" class="overlay-modal d-none">
             <div class="glass-panel card-error border-glow-error max-w-500 text-center">
-                <div class="crisis-icon">🛡️</div>
+                <div class="crisis-icon" role="img" aria-label="Shield">🛡️</div>
                 <h2 class="text-error mt-2">You Are Not Alone. We Care.</h2>
                 <p class="mt-3">It seems like you are carrying an overwhelmingly heavy burden right now. Please remember that exams do not define your worth or your future, and things can get better.</p>
                 

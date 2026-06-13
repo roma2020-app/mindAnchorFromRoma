@@ -2,6 +2,8 @@
    MINDANCHOR: CORE INTERACTIVE LOGIC
    ========================================================================== */
 
+"use strict";
+
 document.addEventListener('DOMContentLoaded', () => {
     
     // --- APP STATE MANAGEMENT ---
