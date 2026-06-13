@@ -17,6 +17,19 @@ To run and test the application immediately:
    ```
 3. Open your browser and go to: **[http://localhost:3000](http://localhost:3000)**
 
+### Production Deployment
+Since MindAnchor is a serverless static web application (HTML, CSS, JS), you can deploy it instantly for free:
+
+*   **Vercel:**
+    1. Install Vercel CLI: `npm install -g vercel`
+    2. Run `vercel` in the project root directory and follow the prompt options.
+*   **GitHub Pages:**
+    1. Push the files (`index.html`, `style.css`, `script.js`) to a GitHub repository.
+    2. Navigate to repository **Settings** -> **Pages**.
+    3. Set build source to your main branch, root folder, and click **Save**.
+*   **Netlify Drag-and-Drop:**
+    1. Drag and drop the project folder directly into the Netlify Drop dashboard (`app.netlify.com/drop`).
+
 ### 30-Second Demo Tour
 On the landing page, click the **✨ Quick Judge Demo Tour (30s)** button.
 * **Onboarding Bypass:** Bypasses registration and logs in as `Roma (UPSC Aspirant)`.
