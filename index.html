@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindAnchor — AI Mental Wellness Tracker for Students</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Ambient Glowing Orbs for Visual Wow-Factor -->
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+
+    <!-- MAIN APP CONTAINER -->
+    <div id="app-container">
+        
+        <!-- ================= ONBOARDING / LOGIN SCREEN ================= -->
+        <div id="auth-screen" class="glass-panel active">
+            <div class="brand-header">
+                <div class="logo-icon">⚓</div>
+                <h1 class="brand-title">MindAnchor</h1>
+                <p class="brand-subtitle">Your AI-Powered Mental Resilience Companion</p>
+            </div>
+            
+            <form id="onboard-form" class="auth-form">
+                <div class="form-group">
+                    <label for="username">Choose an Anonymous Nickname</label>
+                    <input type="text" id="username" placeholder="e.g., SilentAspirant" required autocomplete="off">
+                    <small>Your privacy is absolute. No real names or emails required.</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="target-exam">Target Examination / Academic Path</label>
+                    <select id="target-exam" required>
+                        <option value="" disabled selected>Select your exam</option>
+                        <option value="JEE">JEE (Engineering)</option>
+                        <option value="NEET">NEET (Medical)</option>
+                        <option value="UPSC">UPSC (Civil Services)</option>
+                        <option value="GATE">GATE (Postgrad Engg)</option>
+                        <option value="CAT">CAT (Management)</option>
+                        <option value="CUET">CUET (Undergraduate)</option>
+                        <option value="College">College / Semester Exams</option>
+                        <option value="Other">Other Competitive Exams</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Create Secure Passcode</label>
+                    <input type="password" id="password" placeholder="••••" required minlength="4">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-glow btn-block">Anchor Your Mind</button>
+                <button type="button" id="demo-btn" class="btn btn-accent btn-glow btn-block mt-2">✨ Quick Judge Demo Tour (30s)</button>
+            </form>
+        </div>
+
+        <!-- ================= MAIN DASHBOARD SCREEN ================= -->
+        <div id="dashboard-screen" class="app-layout">
+            
+            <!-- Sidebar Navigation -->
+            <aside class="sidebar glass-panel">
+                <div class="sidebar-brand">
+                    <span class="sidebar-logo">⚓</span>
+                    <span class="sidebar-title">MindAnchor</span>
+                </div>
+                <nav class="sidebar-nav">
+                    <button class="nav-item active" data-view="dashboard">
+                        <span class="nav-icon">📊</span> Dashboard
+                    </button>
+                    <button class="nav-item" data-view="journal">
+                        <span class="nav-icon">✍️</span> AI CBT Reframer
+                    </button>
+                    <button class="nav-item" data-view="chat">
+                        <span class="nav-icon">💬</span> Chat Companion
+                    </button>
+                    <button class="nav-item" data-view="breathing">
+                        <span class="nav-icon">🧘</span> Sound & Breath
+                    </button>
+                    <button class="nav-item" data-view="geeta">
+                        <span class="nav-icon">🕉️</span> Gita Wisdom
+                    </button>
+                    <button class="nav-item" data-view="settings">
+                        <span class="nav-icon">⚙️</span> Settings
+                    </button>
+                </nav>
+                <div class="sidebar-footer">
+                    <div class="user-badge">
+                        <div class="user-avatar" id="avatar-char">S</div>
+                        <div class="user-details">
+                            <div class="user-name" id="display-name">Nickname</div>
+                            <div class="user-exam" id="display-exam">UPSC Aspirant</div>
+                        </div>
+                    </div>
+                    <button id="logout-btn" class="btn btn-icon" title="Log Out">🚪</button>
+                </div>
+            </aside>
+
+            <!-- Main Content Pane -->
+            <main class="main-content">
+                
+                <!-- TOP HEADER -->
+                <header class="content-header">
+                    <div class="greeting-section">
+                        <h2 id="greeting-text">Welcome back, Aspirant</h2>
+                        <p id="date-text" class="subtext">Saturday, June 13, 2026</p>
+                    </div>
+                    <div class="header-actions d-flex gap-2 align-center">
+                        <button id="header-demo-btn" class="btn btn-sm btn-accent btn-glow">✨ Demo Tour</button>
+                        <div class="quick-stat-badge">
+                            <span class="pulse-dot green" id="burnout-status-dot"></span>
+                            <span id="burnout-status-text">Burnout Risk: Stable</span>
+                        </div>
+                        <button id="header-logout-btn" class="btn btn-sm btn-outline" style="border-radius: 20px;">🚪 Log Out</button>
+                    </div>
+                </header>
+
+                <!-- VIEW: DASHBOARD -->
+                <section id="view-dashboard" class="content-view active">
+                    
+                    <!-- Stats Grid -->
+                    <div class="stats-grid">
+                        <!-- Burnout Gauge -->
+                        <div class="stat-card glass-panel text-center">
+                            <h3>Burnout Risk Index</h3>
+                            <div class="radial-gauge-container">
+                                <svg class="radial-gauge" viewBox="0 0 100 100">
+                                    <circle class="gauge-bg" cx="50" cy="50" r="40" />
+                                    <circle class="gauge-fill" id="burnout-gauge" cx="50" cy="50" r="40" />
+                                </svg>
+                                <div class="gauge-val" id="burnout-val">12%</div>
+                            </div>
+                            <p class="stat-desc" id="burnout-tip">You have healthy study-life balance indices today.</p>
+                        </div>
+
+                        <!-- Mood Gauge -->
+                        <div class="stat-card glass-panel text-center">
+                            <h3>Mental State</h3>
+                            <div class="mood-indicator-large" id="mood-emoji">😊</div>
+                            <h4 id="mood-state-text">Focused & Calmer</h4>
+                            <p class="stat-desc" id="mood-advice">Consistent energy levels detected in logs.</p>
+                        </div>
+
+                        <!-- Daily Ratio -->
+                        <div class="stat-card glass-panel">
+                            <h3>Daily Ratios</h3>
+                            <div class="ratio-bars">
+                                <div class="ratio-bar-group">
+                                    <div class="ratio-label">
+                                        <span>Study Time</span>
+                                        <span id="label-study-hours">8 hrs</span>
+                                    </div>
+                                    <div class="ratio-track">
+                                        <div class="ratio-fill study" id="fill-study" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                                <div class="ratio-bar-group">
+                                    <div class="ratio-label">
+                                        <span>Rest & Sleep</span>
+                                        <span id="label-sleep-hours">7 hrs</span>
+                                    </div>
+                                    <div class="ratio-track">
+                                        <div class="ratio-fill sleep" id="fill-sleep" style="width: 70%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="stat-desc mt-3">Target ideal: Sleep &gt; 7 hours; continuous study chunks &lt; 4 hours.</p>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Logging & Chart Row -->
+                    <div class="dashboard-row mt-4">
+                        
+                        <!-- Daily Logger Form -->
+                        <div class="glass-panel col-6">
+                            <h3>Submit Wellness & Study Log</h3>
+                            <form id="mood-logger-form">
+                                <div class="slider-group">
+                                    <label>Current Mood (1 - Low to 5 - Peak)</label>
+                                    <div class="mood-selector">
+                                        <input type="radio" name="mood" id="m1" value="1"><label for="m1">😢</label>
+                                        <input type="radio" name="mood" id="m2" value="2"><label for="m2">😔</label>
+                                        <input type="radio" name="mood" id="m3" value="3" checked><label for="m3">😐</label>
+                                        <input type="radio" name="mood" id="m4" value="4"><label for="m4">😊</label>
+                                        <input type="radio" name="mood" id="m5" value="5"><label for="m5">🔥</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="study-hrs">Study Hours (Today)</label>
+                                        <input type="number" id="study-hrs" min="0" max="24" step="0.5" value="8" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sleep-hrs">Sleep Hours (Last Night)</label>
+                                        <input type="number" id="sleep-hrs" min="0" max="24" step="0.5" value="7" required>
+                                    </div>
+                                </div>
+
+                                <div class="slider-group mt-2">
+                                    <label for="energy-lvl">Energy Level (1-5)</label>
+                                    <input type="range" id="energy-lvl" min="1" max="5" value="3" class="range-slider">
+                                </div>
+
+                                <button type="submit" class="btn btn-accent btn-block mt-3">Log Wellness Metrics</button>
+                            </form>
+                        </div>
+
+                        <!-- Mood Timeline Chart -->
+                        <div class="glass-panel col-6 flex-column justify-between">
+                            <div class="d-flex justify-between align-center">
+                                <h3>Weekly Mood Timeline</h3>
+                                <span class="chart-legend"><span class="legend-dot mood"></span> Mood  <span class="legend-dot burnout"></span> Burnout</span>
+                            </div>
+                            <div class="chart-container">
+                                <svg id="mood-chart" class="chart-svg" viewBox="0 0 500 200">
+                                    <!-- Dynamic lines generated in script -->
+                                </svg>
+                            </div>
+                            <div class="chart-days" id="chart-days-labels">
+                                <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                    </div>
+
+                    <!-- ================= INNOVATION FEATURES ROW ================= -->
+                    <div class="dashboard-row mt-4">
+                        <!-- AI Predictive Insights & Personalized Recs -->
+                        <div class="glass-panel col-6 flex-column justify-between border-glow-primary">
+                            <h3>🔮 AI Predictive Insights & Recs</h3>
+                            <p class="subtitle-text">Generates stress trend forecasts and custom advice based on your logs.</p>
+                            
+                            <div class="predictive-insight-box mt-3" style="background: rgba(99, 102, 241, 0.05); padding: 16px; border-radius: 12px; border: 1.5px dashed var(--border-glow-primary);">
+                                <strong style="color: #818cf8; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 4px;">AI stress forecast:</strong>
+                                <p id="ai-predictive-insight" style="font-size: 0.9rem; line-height: 1.5;">Log metrics to generate AI predictive stress trends.</p>
+                            </div>
+                            
+                            <div class="recommendations-box mt-3">
+                                <h4 style="font-size: 0.95rem; margin-bottom: 8px;">Personalized Wellness Protocol:</h4>
+                                <ul id="ai-recommendations-list" style="list-style: none; padding-left: 0; font-size: 0.85rem; color: var(--text-muted);">
+                                    <!-- Dynamic content -->
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Sustainability & Social Impact Quotient -->
+                        <div class="glass-panel col-6 flex-column justify-between border-glow-success">
+                            <h3>🌱 Social Impact & Sustainability Index</h3>
+                            <p class="subtitle-text">Measures how screen-free breaks, social chats, and peer activities protect your health.</p>
+                            
+                            <div class="d-flex align-center gap-2 mt-3" style="background: rgba(16, 185, 129, 0.05); padding: 16px; border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.15);">
+                                <div class="impact-gauge-circle" style="width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #059669); display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 0 10px var(--accent-glow);">
+                                    <span id="social-impact-val" style="font-size: 1.5rem; font-weight: 800; color: #fff; line-height: 1;">45</span>
+                                    <span style="font-size: 0.6rem; color: rgba(255,255,255,0.8); text-transform: uppercase;">Index</span>
+                                </div>
+                                <div style="flex-grow: 1;">
+                                    <h4 style="font-size: 0.95rem; color: var(--success);">Wellness Sustainability</h4>
+                                    <p class="subtext" style="font-size: 0.75rem;">Your current score. Aim for 80+ to lock in mental resilience.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="smart-suggestions-box mt-3">
+                                <h4 style="font-size: 0.95rem; margin-bottom: 8px;">Smart Actions for Today:</h4>
+                                <div id="smart-actions-list" style="display: flex; flex-direction: column; gap: 8px;">
+                                    <!-- Dynamic checkboxes -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW: AI CBT REFRAMER -->
+                <section id="view-journal" class="content-view">
+                    <div class="glass-panel">
+                        <h2>Cognitive Behavioral Therapy (CBT) Reframer</h2>
+                        <p class="subtitle-text">Write your stressful thoughts or self-doubts. Our AI engine will analyze them for cognitive distortions and reframe them into balanced perspectives.</p>
+                        
+                        <div class="journal-input-area mt-4">
+                            <textarea id="journal-input" rows="6" placeholder="e.g., I did poorly on my mock test today. I'm always failing. I will never crack UPSC and my family will be ashamed of me..."></textarea>
+                            <div class="d-flex justify-between align-center mt-2">
+                                <span class="character-count" id="journal-char-count">0 characters</span>
+                                <button id="reframe-btn" class="btn btn-primary btn-glow">Analyze & Reframe Thought</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comparison Reframer Result Section -->
+                    <div class="reframe-result-row mt-4 d-none" id="reframe-result">
+                        <!-- Original Thought & Distortions -->
+                        <div class="glass-panel col-6 card-error border-glow-error">
+                            <div class="card-header">
+                                <span class="badge badge-error">Distortions Detected</span>
+                                <h3 class="mt-2 text-error" id="detected-distortion-title">Overgeneralization & Catastrophizing</h3>
+                            </div>
+                            <p class="mt-3 journal-quote" id="original-thought-text">"I will never crack UPSC and my family will be ashamed of me..."</p>
+                            <div class="distortion-explanation mt-3">
+                                <strong>Why this is a mental trap:</strong>
+                                <p id="distortion-explanation-text">Catastrophizing exaggerates a single mock test result into a life-defining disaster, while overgeneralization implies a single failure guarantees absolute future failure.</p>
+                            </div>
+                        </div>
+
+                        <!-- CBT Reframed Perspective -->
+                        <div class="glass-panel col-6 card-success border-glow-success">
+                            <div class="card-header">
+                                <span class="badge badge-success">CBT Reframed Perspective</span>
+                                <h3 class="mt-2 text-success">Healthy Alternative Thought</h3>
+                            </div>
+                            <p class="mt-3 journal-quote-reframed" id="reframed-thought-text">"Mock tests are educational assessments, not final verdicts. A single drop in score points out revision areas, not overall failure. My family supports my attempt and values my effort."</p>
+                            <div class="actionable-cbt-tip mt-3">
+                                <strong>Empathetic Study Recommendation:</strong>
+                                <p id="cbt-study-tip">Stop studying for the next 2 hours. Go write down the 3 hardest questions from the test and solve them with answers visible to reset test anxiety.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW: AI CHAT COMPANION -->
+                <section id="view-chat" class="content-view">
+                    <div class="chat-container-layout glass-panel">
+                        <!-- Chat Header -->
+                        <div class="chat-header-bar">
+                            <div class="chat-bot-details">
+                                <div class="bot-avatar">🤖</div>
+                                <div>
+                                    <h3>MindAnchor Buddy</h3>
+                                    <span class="subtext">Empathetic AI Companion • Active Listener</span>
+                                </div>
+                            </div>
+                            <div class="chat-actions">
+                                <button id="clear-chat" class="btn btn-sm btn-outline">Clear History</button>
+                            </div>
+                        </div>
+
+                        <!-- Message Stream -->
+                        <div class="chat-messages-stream" id="chat-messages">
+                            <!-- Messages generated dynamically -->
+                            <div class="chat-message bot">
+                                <div class="message-bubble">
+                                    Hello! I'm your MindAnchor companion. Exams, mock tests, backlogs, sleep schedules, or parent pressure—whatever is weighing on your mind, you can vent it here securely. I'm here to listen.
+                                </div>
+                                <span class="message-time">11:46 AM</span>
+                            </div>
+                        </div>
+
+                        <!-- Prompt Suggestion Chips -->
+                        <div class="chat-suggestions-container">
+                            <button class="suggestion-chip">I failed my mock test today</button>
+                            <button class="suggestion-chip">I have a massive syllabus backlog</button>
+                            <button class="suggestion-chip">I feel extremely burned out</button>
+                            <button class="suggestion-chip">How do I handle parents' expectations?</button>
+                        </div>
+
+                        <!-- Chat Input Box -->
+                        <div class="chat-input-bar">
+                            <input type="text" id="chat-input" placeholder="Vent or talk to your companion..." autocomplete="off">
+                            <button id="chat-send-btn" class="btn btn-primary">Send ➔</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW: SOUND & BREATH -->
+                <section id="view-breathing" class="content-view">
+                    <div class="breathing-layout">
+                        <!-- Box Breathing Centerpiece -->
+                        <div class="glass-panel col-7 text-center d-flex flex-column align-center justify-center breathing-card">
+                            <h2>Binaural Beats & Box Breathing</h2>
+                            <p class="subtitle-text">Calm your amygdala instantly with scientific 4-4-4-4 diaphragmatic box breathing.</p>
+                            
+                            <!-- Breathing Circle -->
+                            <div class="breathing-circle-outer mt-5">
+                                <div class="breathing-circle-inner" id="breath-bubble">
+                                    <span id="breath-instruction">Click Start</span>
+                                    <span id="breath-timer">0s</span>
+                                </div>
+                            </div>
+
+                            <!-- Control Buttons -->
+                            <div class="breathing-controls mt-5">
+                                <button id="start-breath-btn" class="btn btn-accent btn-glow">Start Box Breathing</button>
+                                <button id="stop-breath-btn" class="btn btn-outline d-none">Reset</button>
+                            </div>
+                        </div>
+
+                        <!-- Binaural Audio Console -->
+                        <div class="glass-panel col-5 d-flex flex-column justify-between audio-card">
+                            <div>
+                                <h2>Theta Binaural Generator</h2>
+                                <p class="subtitle-text">Synthesizes real-time sound frequencies to trigger deep relaxation waves (4Hz Theta entrainment).</p>
+                                
+                                <div class="audio-panel-options mt-4">
+                                    <div class="audio-control-row">
+                                        <span class="audio-label">🌊 Waves & Drone</span>
+                                        <button id="play-ambient-btn" class="btn btn-primary">Play Ambient Beats</button>
+                                    </div>
+                                    
+                                    <div class="slider-group mt-4">
+                                        <label for="ambient-volume">Volume Level</label>
+                                        <input type="range" id="ambient-volume" min="0" max="1" step="0.1" value="0.5" class="range-slider">
+                                    </div>
+                                </div>
+
+                                <div class="benefits-list mt-4">
+                                    <h4>Scientific Benefits:</h4>
+                                    <ul>
+                                        <li>✓ 4Hz Binaural frequency reduces cortisol (stress hormone).</li>
+                                        <li>✓ Box breathing balances the autonomic nervous system.</li>
+                                        <li>✓ Resets adrenaline surges triggered by study stress.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="audio-badge">
+                                <span class="audio-pulse-icon">📡</span> Web Audio Synthesized Live (No downloads)
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW: SETTINGS -->
+                <section id="view-settings" class="content-view">
+                    <div class="glass-panel">
+                        <h2>System Configuration</h2>
+                        <p class="subtitle-text">Configure your API integrations, customize client profiles, or purge local databases.</p>
+
+                        <!-- Gemini API configuration -->
+                        <div class="settings-group mt-4">
+                            <h3>Google Gemini AI Engine</h3>
+                            <p class="subtitle-text">Enter your Google Gemini API Key to enable authentic, advanced mental health insights and customized cognitive reframing. Otherwise, local premium simulation filters will be utilized.</p>
+                            <div class="api-key-input-container mt-2">
+                                <input type="password" id="gemini-api-key" placeholder="Enter AI_GEMINI_API_KEY..." class="form-input">
+                                <button id="save-api-key-btn" class="btn btn-primary">Save Key</button>
+                                <button id="clear-api-key-btn" class="btn btn-outline d-none">Remove Key</button>
+                            </div>
+                            <small class="text-success d-none mt-1" id="api-status-msg">✓ Key saved to secure localStorage. App will call live Gemini API endpoints.</small>
+                        </div>
+
+                        <!-- Exam Reset/Configuration -->
+                        <div class="settings-group mt-5">
+                            <h3>Update Target Exam Profile</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="settings-username">Modify Nickname</label>
+                                    <input type="text" id="settings-username" placeholder="Nickname">
+                                </div>
+                                <div class="form-group">
+                                    <label for="settings-exam">Modify Exam Track</label>
+                                    <select id="settings-exam">
+                                        <option value="JEE">JEE (Engineering)</option>
+                                        <option value="NEET">NEET (Medical)</option>
+                                        <option value="UPSC">UPSC (Civil Services)</option>
+                                        <option value="GATE">GATE (Postgrad Engg)</option>
+                                        <option value="CAT">CAT (Management)</option>
+                                        <option value="CUET">CUET (Undergraduate)</option>
+                                        <option value="College">College / Semester Exams</option>
+                                        <option value="Other">Other Competitive Exams</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button id="update-profile-btn" class="btn btn-accent mt-3">Update User Profile</button>
+                        </div>
+
+                        <!-- Data purge -->
+                        <div class="settings-group mt-5 card-error-light border-glow-error">
+                            <h3>Danger Zone</h3>
+                            <p class="subtitle-text">Permanently erases your local log histories, chat channels, and auth sessions from this browser cache. This action is irreversible.</p>
+                            <button id="purge-data-btn" class="btn btn-danger mt-3">Purge All Local Records</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW: GITA WISDOM SANCTUARY -->
+                <section id="view-geeta" class="content-view">
+                    <div class="glass-panel text-center d-flex flex-column align-center justify-center border-glow-primary" style="min-height: 500px; position: relative; overflow: hidden; padding: 40px 24px;">
+                        
+                        <div style="font-size: 3rem; margin-bottom: 12px; filter: drop-shadow(0 0 8px var(--primary-glow));">🕉️</div>
+                        <h2>Gita Wisdom Sanctuary</h2>
+                        <p class="subtitle-text" style="max-width: 600px; margin: 8px auto 0 auto;">Ancient mental resilience principles for JEE, NEET, and UPSC aspirants. Seek grounding, focus guidance, and stress relief.</p>
+                        
+                        <!-- Shloka Display Card -->
+                        <div class="shloka-card mt-4" style="background: rgba(0, 0, 0, 0.15); border: 1.5px solid var(--border-color); padding: 32px; border-radius: var(--border-radius-lg); width: 100%; max-width: 680px; position: relative; box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
+                            
+                            <!-- Sanskrit Verse -->
+                            <div id="shloka-sanskrit" style="font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700; color: #fcd34d; line-height: 1.8; margin-bottom: 20px; text-shadow: 0 2px 4px rgba(0,0,0,0.4); white-space: pre-wrap;">
+कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।
+मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥
+                            </div>
+                            
+                            <!-- Transliteration -->
+                            <div id="shloka-transliteration" style="font-style: italic; font-size: 0.95rem; color: var(--text-muted); margin-bottom: 24px; line-height: 1.5;">
+                                "Karmaṇy-evādhikāras te mā phaleṣhu kadāchana..."
+                            </div>
+                            
+                            <!-- Translation -->
+                            <div style="border-top: 1px solid rgba(255, 255, 255, 0.06); padding-top: 20px;">
+                                <strong style="color: var(--text-main); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 8px;">Meaning / Translation:</strong>
+                                <p id="shloka-translation" style="font-size: 1.05rem; line-height: 1.6; color: var(--text-main);">
+                                    "You have a right to perform your prescribed duties, but you are not entitled to the fruits of your actions..."
+                                </p>
+                            </div>
+
+                            <!-- Student-Centered Summary -->
+                            <div class="mt-4" style="background: rgba(99, 102, 241, 0.03); border: 1px dashed rgba(99, 102, 241, 0.15); padding: 16px; border-radius: var(--border-radius-md); text-align: left;">
+                                <strong style="color: #818cf8; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 4px;">🎯 Student Focus Guidance:</strong>
+                                <p id="shloka-summary" style="font-size: 0.9rem; line-height: 1.5; color: var(--text-muted);">
+                                    Focus entirely on your study schedule and active learning, rather than paralyzing yourself with fear of mock test ranks. You control your effort, not the final cutoffs.
+                                </p>
+                            </div>
+
+                            <!-- Actions: Seek & Play Audio -->
+                            <div class="d-flex justify-center gap-2 mt-4 flex-wrap">
+                                <button id="play-shloka-audio-btn" class="btn btn-outline" style="border-radius: 12px; font-size: 0.9rem; padding: 10px 20px;">🔊 Play Audio Translation</button>
+                                <button id="next-shloka-btn" class="btn btn-primary btn-glow" style="border-radius: 12px; font-size: 0.9rem; padding: 10px 20px;">✨ Seek Verse of Wisdom</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+
+        <!-- ================= MOBILE BOTTOM NAVIGATION BAR ================= -->
+        <div class="mobile-nav-bar">
+            <button class="nav-item mobile-nav-item active" data-view="dashboard" title="Dashboard">📊</button>
+            <button class="nav-item mobile-nav-item" data-view="journal" title="CBT Reframer">✍️</button>
+            <button class="nav-item mobile-nav-item" data-view="chat" title="Chat Companion">💬</button>
+            <button class="nav-item mobile-nav-item" data-view="breathing" title="Sound & Breath">🧘</button>
+            <button class="nav-item mobile-nav-item" data-view="geeta" title="Gita Wisdom">🕉️</button>
+            <button class="nav-item mobile-nav-item" data-view="settings" title="Settings">⚙️</button>
+        </div>
+
+        <!-- ================= CRISIS HELPLINE OVERLAY ================= -->
+        <div id="crisis-overlay" class="overlay-modal d-none">
+            <div class="glass-panel card-error border-glow-error max-w-500 text-center">
+                <div class="crisis-icon">🛡️</div>
+                <h2 class="text-error mt-2">You Are Not Alone. We Care.</h2>
+                <p class="mt-3">It seems like you are carrying an overwhelmingly heavy burden right now. Please remember that exams do not define your worth or your future, and things can get better.</p>
+                
+                <div class="helplines-box mt-4">
+                    <h3>24/7 Verified Academic & Crisis Support:</h3>
+                    
+                    <div class="helpline-item">
+                        <strong>KIRAN Helpline (Govt of India):</strong>
+                        <span class="phone-number">1800-599-0019</span>
+                    </div>
+                    <div class="helpline-item">
+                        <strong>Tele-MANAS Mental Health Link:</strong>
+                        <span class="phone-number">14416 / 1800-891-4416</span>
+                    </div>
+                    <div class="helpline-item">
+                        <strong>Vandrevala Foundation Helpline:</strong>
+                        <span class="phone-number">+91 9999 666 555</span>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-center mt-4 gap-2">
+                    <button id="close-crisis-overlay" class="btn btn-outline">Close Alert</button>
+                    <a href="tel:14416" class="btn btn-primary btn-glow">Call Tele-MANAS Now</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
