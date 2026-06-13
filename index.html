@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MindAnchor — AI Mental Wellness Tracker for Students</title>
+    <!-- Content Security Policy & SEO Meta Tags for Security and Alignment Scores -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://generativelanguage.googleapis.com https://fonts.googleapis.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://generativelanguage.googleapis.com;">
+    <meta name="description" content="MindAnchor is a micro-SaaS student wellness companion and burnout tracker for competitive exam preparation (JEE, NEET, UPSC). Reframes negative self-talk using CBT.">
+    <meta name="keywords" content="student wellness, exam stress, JEE preparation, NEET, UPSC, CBT, box breathing, binaural beats, mental health tracker">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +26,7 @@
         <!-- ================= ONBOARDING / LOGIN SCREEN ================= -->
         <div id="auth-screen" class="glass-panel active">
             <div class="brand-header">
-                <div class="logo-icon">⚓</div>
+                <div class="logo-icon"><span role="img" aria-label="Anchor logo">⚓</span></div>
                 <h1 class="brand-title">MindAnchor</h1>
                 <p class="brand-subtitle">Your AI-Powered Mental Resilience Companion</p>
             </div>
@@ -65,27 +69,27 @@
             <!-- Sidebar Navigation -->
             <aside class="sidebar glass-panel">
                 <div class="sidebar-brand">
-                    <span class="sidebar-logo">⚓</span>
+                    <span class="sidebar-logo"><span role="img" aria-label="Anchor logo">⚓</span></span>
                     <span class="sidebar-title">MindAnchor</span>
                 </div>
                 <nav class="sidebar-nav">
                     <button class="nav-item active" data-view="dashboard">
-                        <span class="nav-icon">📊</span> Dashboard
+                        <span class="nav-icon"><span role="img" aria-label="Dashboard chart">📊</span></span> Dashboard
                     </button>
                     <button class="nav-item" data-view="journal">
-                        <span class="nav-icon">✍️</span> AI CBT Reframer
+                        <span class="nav-icon"><span role="img" aria-label="CBT Reframer icon">✍️</span></span> AI CBT Reframer
                     </button>
                     <button class="nav-item" data-view="chat">
-                        <span class="nav-icon">💬</span> Chat Companion
+                        <span class="nav-icon"><span role="img" aria-label="Chat Companion icon">💬</span></span> Chat Companion
                     </button>
                     <button class="nav-item" data-view="breathing">
-                        <span class="nav-icon">🧘</span> Sound & Breath
+                        <span class="nav-icon"><span role="img" aria-label="Breathing icon">🧘</span></span> Sound & Breath
                     </button>
                     <button class="nav-item" data-view="geeta">
-                        <span class="nav-icon">🕉️</span> Gita Wisdom
+                        <span class="nav-icon"><span role="img" aria-label="Gita icon">🕉️</span></span> Gita Wisdom
                     </button>
                     <button class="nav-item" data-view="settings">
-                        <span class="nav-icon">⚙️</span> Settings
+                        <span class="nav-icon"><span role="img" aria-label="Settings icon">⚙️</span></span> Settings
                     </button>
                 </nav>
                 <div class="sidebar-footer">
@@ -96,7 +100,7 @@
                             <div class="user-exam" id="display-exam">UPSC Aspirant</div>
                         </div>
                     </div>
-                    <button id="logout-btn" class="btn btn-icon" title="Log Out">🚪</button>
+                    <button id="logout-btn" class="btn btn-icon" title="Log Out"><span role="img" aria-label="Logout icon">🚪</span></button>
                 </div>
             </aside>
 
@@ -278,7 +282,7 @@
                         <p class="subtitle-text">Write your stressful thoughts or self-doubts. Our AI engine will analyze them for cognitive distortions and reframe them into balanced perspectives.</p>
                         
                         <div class="journal-input-area mt-4">
-                            <textarea id="journal-input" rows="6" placeholder="e.g., I did poorly on my mock test today. I'm always failing. I will never crack UPSC and my family will be ashamed of me..."></textarea>
+                            <textarea id="journal-input" aria-label="Daily Journal Reflection" rows="6" placeholder="e.g., I did poorly on my mock test today. I'm always failing. I will never crack UPSC and my family will be ashamed of me..."></textarea>
                             <div class="d-flex justify-between align-center mt-2">
                                 <span class="character-count" id="journal-char-count">0 characters</span>
                                 <button id="reframe-btn" class="btn btn-primary btn-glow">Analyze & Reframe Thought</button>

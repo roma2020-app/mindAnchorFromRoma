@@ -1,0 +1,21 @@
+{
+  "name": "mindanchor",
+  "version": "1.0.0",
+  "description": "AI-Powered Mental Wellness Tracker for Students",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "mental-health",
+    "student",
+    "wellness",
+    "cbt",
+    "resilience"
+  ],
+  "author": "MindAnchor Team",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.5.0"
+  }
+}
